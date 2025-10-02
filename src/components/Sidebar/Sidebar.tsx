@@ -34,7 +34,7 @@ export function Sidebar() {
       {/* Logo */}
       <div className="h-[80px] flex items-center justify-start px-6 ml-3">
         <span className="text-white ml-10 text-2xl font-semibold">
-          Karmandia
+          RareRoutes
         </span>
       </div>
 

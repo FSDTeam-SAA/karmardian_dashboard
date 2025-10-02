@@ -29,22 +29,6 @@ import { useSession } from "next-auth/react";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import "react-quill/dist/quill.snow.css";
 
-const formSchema = z.object({
-  categoryName: z
-    .string()
-    .min(2, { message: "Title must be at least 2 characters." }),
-  categorydescription: z
-    .string()
-    .min(10, "Description must be at least 10 characters")
-    .max(200, "Description must not exceed 200 characters"),
-  image: z
-    .instanceof(File)
-    .optional()
-    .refine((file) => !file || file.type.startsWith("image/"), {
-      message: "Only image files are allowed",
-    }),
-});
-
 export function AddExprences() {
   const [preview, setPreview] = useState<string | null>(null);
   const { data: session } = useSession();
@@ -53,6 +37,25 @@ export function AddExprences() {
 
   const queryClient = useQueryClient();
   const router = useRouter();
+
+  // Move schema inside component and replace File with runtime check
+  const formSchema = z.object({
+    categoryName: z
+      .string()
+      .min(2, { message: "Title must be at least 2 characters." }),
+    categorydescription: z
+      .string()
+      .min(10, "Description must be at least 10 characters")
+      .max(200, "Description must not exceed 200 characters"),
+    image: z
+      .any()
+      .optional()
+      .refine(
+        (file) => !file || (file instanceof File && file.type.startsWith("image/")),
+        { message: "Only image files are allowed" }
+      ),
+  });
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {

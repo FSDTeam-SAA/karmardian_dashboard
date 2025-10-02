@@ -1,12 +1,12 @@
-import React from 'react'
-import { AddExprences } from './_Components/AddExprences'
+import React from "react";
+import { AddExprences } from "./_Components/AddExprences";
 
-function page() {
+function Page() {
   return (
     <div>
-        <AddExprences />
+      <AddExprences />
     </div>
-  )
+  );
 }
 
-export default page
+export default Page;
