@@ -69,8 +69,9 @@ const LoginForm = () => {
         <Image
           src="/images/loginImage.jpg"
           alt="Sign Up Illustration"
-          fill
-          className="object-cover"
+          width={500}
+          height={500}
+          className="object-cover w-full h-full"
         />
         <div className="absolute inset-0 bg-black/30" />
         
