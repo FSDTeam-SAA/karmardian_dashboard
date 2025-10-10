@@ -91,7 +91,7 @@ export function AddExprences() {
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["experiences"] });
       toast.success(data.message || "Experience created successfully!");
-      router.push("/"); // Update route if needed
+      router.push("/dashboard"); // Update route if needed
     },
     onError: (err: unknown) => {
       if (err instanceof Error) toast.error(err.message);
